@@ -78,7 +78,6 @@ void kernel_symm(int m, int n,
 		 DATA_TYPE POLYBENCH_2D(A,M,M,m,m),
 		 DATA_TYPE POLYBENCH_2D(B,M,N,m,n))
 {
-  DATA_TYPE temp2;
 
 //BLAS PARAMS
 //SIDE = 'L'
@@ -92,7 +91,7 @@ void kernel_symm(int m, int n,
    for (int i = 0; i < 1000; i++)
       for (int j = 0; j < 1200; j++ )
       {
-        temp2 = 0.0;
+        double temp2 = 0.0;
         for (int k = 0; k < i; k++) {
            C[k][j] += alpha*B[i][j] * A[i][k];
            temp2 += B[k][j] * A[i][k];
