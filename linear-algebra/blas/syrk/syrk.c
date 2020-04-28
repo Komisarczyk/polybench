@@ -71,7 +71,6 @@ void kernel_syrk(int n, int m,
 		 DATA_TYPE POLYBENCH_2D(C,N,N,n,n),
 		 DATA_TYPE POLYBENCH_2D(A,N,M,n,m))
 {
-  int i, j, k;
 
 //BLAS PARAMS
 //TRANS = 'N'
@@ -80,11 +79,11 @@ void kernel_syrk(int n, int m,
 //A is NxM
 //C is NxN
 #pragma scop
-  for (i = 0; i < _PB_N; i++) {
-    for (j = 0; j <= i; j++)
+  for (int i = 0; i < 1200; i++) {
+    for (int j = 0; j <= i; j++)
       C[i][j] *= beta;
-    for (k = 0; k < _PB_M; k++) {
-      for (j = 0; j <= i; j++)
+    for (int k = 0; k < 1000; k++) {
+      for (int j = 0; j <= i; j++)
         C[i][j] += alpha * A[i][k] * A[j][k];
     }
   }

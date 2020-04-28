@@ -77,15 +77,15 @@ void kernel_bicg(int m, int n,
 		 DATA_TYPE POLYBENCH_1D(p,M,m),
 		 DATA_TYPE POLYBENCH_1D(r,N,n))
 {
-  int i, j;
+
 
 #pragma scop
-  for (i = 0; i < _PB_M; i++)
-    s[i] = 0;
-  for (i = 0; i < _PB_N; i++)
+  for (int i = 0; i < 1900; i++)
+    s[i] = 0.0;
+  for (int i = 0; i < 2100; i++)
     {
       q[i] = SCALAR_VAL(0.0);
-      for (j = 0; j < _PB_M; j++)
+      for (int j = 0; j < 1900; j++)
 	{
 	  s[j] = s[j] + r[i] * A[i][j];
 	  q[i] = q[i] + A[i][j] * p[j];

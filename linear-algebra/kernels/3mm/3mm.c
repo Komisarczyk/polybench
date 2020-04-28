@@ -78,37 +78,36 @@ void kernel_3mm(int ni, int nj, int nk, int nl, int nm,
 		DATA_TYPE POLYBENCH_2D(D,NM,NL,nm,nl),
 		DATA_TYPE POLYBENCH_2D(G,NI,NL,ni,nl))
 {
-  int i, j, k;
+
 
 #pragma scop
   /* E := A*B */
-  for (i = 0; i < _PB_NI; i++)
-    for (j = 0; j < _PB_NJ; j++)
+  for (int i = 0; i < 800; i++)
+    for (int j = 0; j < 900; j++)
       {
 	E[i][j] = SCALAR_VAL(0.0);
-	for (k = 0; k < _PB_NK; ++k)
+	for (int k = 0; k < 1000; ++k)
 	  E[i][j] += A[i][k] * B[k][j];
       }
   /* F := C*D */
-  for (i = 0; i < _PB_NJ; i++)
-    for (j = 0; j < _PB_NL; j++)
+  for (int i = 0; i < 900; i++)
+    for (int j = 0; j < 1100; j++)
       {
 	F[i][j] = SCALAR_VAL(0.0);
-	for (k = 0; k < _PB_NM; ++k)
+	for (int k = 0; k < 1200; ++k)
 	  F[i][j] += C[i][k] * D[k][j];
       }
   /* G := E*F */
-  for (i = 0; i < _PB_NI; i++)
-    for (j = 0; j < _PB_NL; j++)
+  for (int i = 0; i < 800; i++)
+    for (int j = 0; j < 1100; j++)
       {
 	G[i][j] = SCALAR_VAL(0.0);
-	for (k = 0; k < _PB_NJ; ++k)
+	for (int k = 0; k < 900; ++k)
 	  G[i][j] += E[i][k] * F[k][j];
       }
 #pragma endscop
 
 }
-
 
 int main(int argc, char** argv)
 {

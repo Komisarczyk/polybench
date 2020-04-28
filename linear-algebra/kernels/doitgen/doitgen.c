@@ -67,23 +67,21 @@ void kernel_doitgen(int nr, int nq, int np,
 		    DATA_TYPE POLYBENCH_2D(C4,NP,NP,np,np),
 		    DATA_TYPE POLYBENCH_1D(sum,NP,np))
 {
-  int r, q, p, s;
 
 #pragma scop
-  for (r = 0; r < _PB_NR; r++)
-    for (q = 0; q < _PB_NQ; q++)  {
-      for (p = 0; p < _PB_NP; p++)  {
+  for (int r = 0; r < 150; r++)
+    for (int q = 0; q < 140; q++)  {
+      for (int p = 0; p < 160; p++)  {
 	sum[p] = SCALAR_VAL(0.0);
-	for (s = 0; s < _PB_NP; s++)
+	for (int s = 0; s < 160; s++)
 	  sum[p] += A[r][q][s] * C4[s][p];
       }
-      for (p = 0; p < _PB_NP; p++)
+      for (int p = 0; p < 160; p++)
 	A[r][q][p] = sum[p];
     }
 #pragma endscop
 
 }
-
 
 int main(int argc, char** argv)
 {

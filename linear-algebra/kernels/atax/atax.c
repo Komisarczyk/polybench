@@ -71,14 +71,14 @@ void kernel_atax(int m, int n,
   int i, j;
 
 #pragma scop
-  for (i = 0; i < _PB_N; i++)
-    y[i] = 0;
-  for (i = 0; i < _PB_M; i++)
+  for (int i = 0; i < 2100; i++)
+    y[i] = 0.0;
+  for (int i = 0; i < 1900; i++)
     {
       tmp[i] = SCALAR_VAL(0.0);
-      for (j = 0; j < _PB_N; j++)
+      for (int j = 0; j < 2100; j++)
 	tmp[i] = tmp[i] + A[i][j] * x[j];
-      for (j = 0; j < _PB_N; j++)
+      for (int j = 0; j < 2100; j++)
 	y[j] = y[j] + A[i][j] * tmp[i];
     }
 #pragma endscop

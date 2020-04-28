@@ -77,14 +77,14 @@ void kernel_gesummv(int n,
 		    DATA_TYPE POLYBENCH_1D(x,N,n),
 		    DATA_TYPE POLYBENCH_1D(y,N,n))
 {
-  int i, j;
+
 
 #pragma scop
-  for (i = 0; i < _PB_N; i++)
+  for (int i = 0; i < 1300; i++)
     {
       tmp[i] = SCALAR_VAL(0.0);
       y[i] = SCALAR_VAL(0.0);
-      for (j = 0; j < _PB_N; j++)
+      for (int j = 0; j < 1300; j++)
 	{
 	  tmp[i] = A[i][j] * x[j] + tmp[i];
 	  y[i] = B[i][j] * x[j] + y[i];
