@@ -94,23 +94,22 @@ void kernel_gemver(int n,
 		   DATA_TYPE POLYBENCH_1D(y,N,n),
 		   DATA_TYPE POLYBENCH_1D(z,N,n))
 {
-  int i, j;
 
 #pragma scop
 
-  for (i = 0; i < _PB_N; i++)
-    for (j = 0; j < _PB_N; j++)
+  for (int i = 0; i < 2000; i++)
+    for (int j = 0; j < 2000; j++)
       A[i][j] = A[i][j] + u1[i] * v1[j] + u2[i] * v2[j];
 
-  for (i = 0; i < _PB_N; i++)
-    for (j = 0; j < _PB_N; j++)
+  for (int i = 0; i < 2000; i++)
+    for (int j = 0; j < 2000; j++)
       x[i] = x[i] + beta * A[j][i] * y[j];
 
-  for (i = 0; i < _PB_N; i++)
+  for (int i = 0; i < 2000; i++)
     x[i] = x[i] + z[i];
 
-  for (i = 0; i < _PB_N; i++)
-    for (j = 0; j < _PB_N; j++)
+  for (int i = 0; i < 2000; i++)
+    for (int j = 0; j < 2000; j++)
       w[i] = w[i] +  alpha * A[i][j] * x[j];
 
 #pragma endscop
