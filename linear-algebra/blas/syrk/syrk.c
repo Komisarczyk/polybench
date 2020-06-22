@@ -79,10 +79,10 @@ void kernel_syrk(int n, int m,
 //A is NxM
 //C is NxN
 #pragma scop
-  for (int i = 0; i < 1200; i++) {
+  for (int i = 0; i < N; i++) {
     for (int j = 0; j <= i; j++)
       C[i][j] *= beta;
-    for (int k = 0; k < 1000; k++) {
+    for (int k = 0; k < M; k++) {
       for (int j = 0; j <= i; j++)
         C[i][j] += alpha * A[i][k] * A[j][k];
     }

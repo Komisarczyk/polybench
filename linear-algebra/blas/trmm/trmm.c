@@ -82,9 +82,9 @@ void kernel_trmm(int m, int n,
 // A is MxM
 // B is MxN
 #pragma scop
-  for (int i = 0; i < 1000; i++)
-     for (int j = 0; j < 1200; j++) {
-        for (int k = i+1; k < 1000; k++)
+  for (int i = 0; i < M; i++)
+     for (int j = 0; j < N; j++) {
+        for (int k = i+1; k < M; k++)
            B[i][j] += A[k][i] * B[k][j];
         B[i][j] = alpha * B[i][j];
      }

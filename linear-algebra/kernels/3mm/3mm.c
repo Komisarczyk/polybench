@@ -82,27 +82,27 @@ void kernel_3mm(int ni, int nj, int nk, int nl, int nm,
 
 #pragma scop
   /* E := A*B */
-  for (int i = 0; i < 800; i++)
-    for (int j = 0; j < 900; j++)
+  for (int i = 0; i < NI; i++)
+    for (int j = 0; j < NJ; j++)
       {
 	E[i][j] = SCALAR_VAL(0.0);
-	for (int k = 0; k < 1000; ++k)
+	for (int k = 0; k < NK; ++k)
 	  E[i][j] += A[i][k] * B[k][j];
       }
   /* F := C*D */
-  for (int i = 0; i < 900; i++)
-    for (int j = 0; j < 1100; j++)
+  for (int i = 0; i < NJ; i++)
+    for (int j = 0; j < NL; j++)
       {
 	F[i][j] = SCALAR_VAL(0.0);
-	for (int k = 0; k < 1200; ++k)
+	for (int k = 0; k < NM; ++k)
 	  F[i][j] += C[i][k] * D[k][j];
       }
   /* G := E*F */
-  for (int i = 0; i < 800; i++)
-    for (int j = 0; j < 1100; j++)
+  for (int i = 0; i < NI; i++)
+    for (int j = 0; j < NL; j++)
       {
 	G[i][j] = SCALAR_VAL(0.0);
-	for (int k = 0; k < 900; ++k)
+	for (int k = 0; k < NJ; ++k)
 	  G[i][j] += E[i][k] * F[k][j];
       }
 #pragma endscop

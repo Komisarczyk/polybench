@@ -80,11 +80,11 @@ void kernel_gesummv(int n,
 
 
 #pragma scop
-  for (int i = 0; i < 1300; i++)
+  for (int i = 0; i < N; i++)
     {
       tmp[i] = SCALAR_VAL(0.0);
       y[i] = SCALAR_VAL(0.0);
-      for (int j = 0; j < 1300; j++)
+      for (int j = 0; j < N; j++)
 	{
 	  tmp[i] = A[i][j] * x[j] + tmp[i];
 	  y[i] = B[i][j] * x[j] + y[i];

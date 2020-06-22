@@ -80,12 +80,12 @@ void kernel_bicg(int m, int n,
 
 
 #pragma scop
-  for (int i = 0; i < 1900; i++)
+  for (int i = 0; i < M; i++)
     s[i] = 0.0;
-  for (int i = 0; i < 2100; i++)
+  for (int i = 0; i < N; i++)
     {
       q[i] = SCALAR_VAL(0.0);
-      for (int j = 0; j < 1900; j++)
+      for (int j = 0; j < M; j++)
 	{
 	  s[j] = s[j] + r[i] * A[i][j];
 	  q[i] = q[i] + A[i][j] * p[j];

@@ -86,18 +86,18 @@ void kernel_2mm(int ni, int nj, int nk, int nl,
 
 #pragma scop
   /* D := alpha*A*B*C + beta*D */
-  for (int i = 0; i < 800; i++)
-    for (int j = 0; j < 900; j++)
+  for (int i = 0; i < NI; i++)
+    for (int j = 0; j < NJ; j++)
       {
 	tmp[i][j] = SCALAR_VAL(0.0);
-	for (int k = 0; k < 1100; ++k)
+	for (int k = 0; k < NK; ++k)
 	  tmp[i][j] += alpha * A[i][k] * B[k][j];
       }
-  for (int i = 0; i < 800; i++)
-    for (int j = 0; j < 1200; j++)
+  for (int i = 0; i < NI; i++)
+    for (int j = 0; j < NL; j++)
       {
 	D[i][j] *= beta;
-	for (int k = 0; k < 900; ++k)
+	for (int k = 0; k < NJ; ++k)
 	  D[i][j] += tmp[i][k] * C[k][j];
       }
 #pragma endscop

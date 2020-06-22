@@ -66,26 +66,25 @@ void kernel_heat_3d(int tsteps,
 		      DATA_TYPE POLYBENCH_3D(A,N,N,N,n,n,n),
 		      DATA_TYPE POLYBENCH_3D(B,N,N,N,n,n,n))
 {
-  int t, i, j, k;
 
 #pragma scop
-    for (t = 1; t <= TSTEPS; t++) {
-        for (i = 1; i < _PB_N-1; i++) {
-            for (j = 1; j < _PB_N-1; j++) {
-                for (k = 1; k < _PB_N-1; k++) {
-                    B[i][j][k] =   SCALAR_VAL(0.125) * (A[i+1][j][k] - SCALAR_VAL(2.0) * A[i][j][k] + A[i-1][j][k])
-                                 + SCALAR_VAL(0.125) * (A[i][j+1][k] - SCALAR_VAL(2.0) * A[i][j][k] + A[i][j-1][k])
-                                 + SCALAR_VAL(0.125) * (A[i][j][k+1] - SCALAR_VAL(2.0) * A[i][j][k] + A[i][j][k-1])
+    for (int t = 1; t <= TSTEPS; t++) {
+        for (int i = 1; i < N-1; i++) {
+            for (int j = 1; j < N-1; j++) {
+                for (int k = 1; k < N-1; k++) {
+                    B[i][j][k] =   (0.125f) * (A[i+1][j][k] - (2.0f) * A[i][j][k] + A[i-1][j][k])
+                                 + (0.125f) * (A[i][j+1][k] - (2.0f) * A[i][j][k] + A[i][j-1][k])
+                                 + (0.125f) * (A[i][j][k+1] - (2.0f) * A[i][j][k] + A[i][j][k-1])
                                  + A[i][j][k];
                 }
             }
         }
-        for (i = 1; i < _PB_N-1; i++) {
-           for (j = 1; j < _PB_N-1; j++) {
-               for (k = 1; k < _PB_N-1; k++) {
-                   A[i][j][k] =   SCALAR_VAL(0.125) * (B[i+1][j][k] - SCALAR_VAL(2.0) * B[i][j][k] + B[i-1][j][k])
-                                + SCALAR_VAL(0.125) * (B[i][j+1][k] - SCALAR_VAL(2.0) * B[i][j][k] + B[i][j-1][k])
-                                + SCALAR_VAL(0.125) * (B[i][j][k+1] - SCALAR_VAL(2.0) * B[i][j][k] + B[i][j][k-1])
+        for (int i = 1; i < N-1; i++) {
+           for (int j = 1; j < N-1; j++) {
+               for (int k = 1; k < N-1; k++) {
+                   A[i][j][k] =   (0.125f) * (B[i+1][j][k] - (2.0f) * B[i][j][k] + B[i-1][j][k])
+                                + (0.125f) * (B[i][j+1][k] - (2.0f) * B[i][j][k] + B[i][j-1][k])
+                                + (0.125f) * (B[i][j][k+1] - (2.0f) * B[i][j][k] + B[i][j][k-1])
                                 + B[i][j][k];
                }
            }
