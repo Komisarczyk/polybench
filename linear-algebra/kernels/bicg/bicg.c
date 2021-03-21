@@ -13,7 +13,6 @@
 #include <unistd.h>
 #include <string.h>
 #include <math.h>
-
 /* Include polybench common header. */
 #include <polybench.h>
 
@@ -80,14 +79,24 @@ void kernel_bicg(int m, int n,
 
 
 #pragma scop
-  for (int i = 0; i < M; i++)
-    s[i] = 0.0;
+
   for (int i = 0; i < N; i++)
     {
-      q[i] = SCALAR_VAL(0.0);
+    s[i] = SCALAR_VAL(0.0);
+  
       for (int j = 0; j < M; j++)
 	{
 	  s[j] = s[j] + r[i] * A[i][j];
+
+	}
+    }
+  for (int i = 0; i < N; i++)
+    {
+
+      q[i] = SCALAR_VAL(0.0);
+      for (int j = 0; j < M; j++)
+	{
+
 	  q[i] = q[i] + A[i][j] * p[j];
 	}
     }

@@ -75,8 +75,8 @@ void kernel_trisolv(int n,
     {
       x[i] = b[i];
       for (int j = 0; j < i; j++)
-        x[i] = x[i] - L[i][j] * x[j];
-      x[i] = x[i] / L[i][i];
+        x[i] -= L[i][j] * x[j];
+      x[i] /= L[i][i];
     }
 #pragma endscop
 

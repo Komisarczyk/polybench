@@ -91,7 +91,7 @@ void kernel_lu(int n,
        for (int k = 0; k < j; k++) {
           A[i][j] = A[i][j] - A[i][k] * A[k][j];
        }
-        A[i][j] = A [i][j] / A[j][j];
+        A[i][j] /= A[j][j];
     }
    for (int j = i; j < N; j++) {
        for (int k = 0; k < i; k++) {
